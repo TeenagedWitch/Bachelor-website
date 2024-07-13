@@ -7,7 +7,7 @@ const App: React.FC = () => {
   const headerText = ["Generate", "Your", "Data!"];
 
   return (
-    <>
+    <div>
       <div className={classes.header}>
         {headerText.map((el, i) => (
           <motion.span
@@ -35,7 +35,7 @@ const App: React.FC = () => {
         <ReusableButton path={"binary"} name={"Binary tree"} />
         <ReusableButton path={"sequences"} name={"Sequences"} />
       </motion.div>
-    </>
+    </div>
   );
 };
 
