@@ -16,7 +16,7 @@ const DAGGenerator: React.FC = () => {
 
     for (let i = 1; i <= chestnuts; i++) {
       const chestnutId = `Chestnut_${i}`;
-      const dependency = `Spike_${Math.floor(Math.random() * spikes) + 1}`; // Connect chestnut to a random spike
+      const dependency = `Spike_${Math.floor(Math.random() * spikes) + 1}`;
       nodes.push({
         id: chestnutId,
         label: `Chestnut ${i}`,
@@ -50,7 +50,7 @@ const DAGGenerator: React.FC = () => {
     <div className={classes.dag}>
       <div className={classes.dagInputs}>
         <label>
-          Number of Spikes:
+          Number of Vertices:
           <br />
           <input
             type="number"
@@ -62,7 +62,7 @@ const DAGGenerator: React.FC = () => {
           />
         </label>
         <label>
-          Number of Chestnuts:
+          Number of edges:
           <br />
           <input
             type="number"

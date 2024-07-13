@@ -30,7 +30,7 @@ const App: React.FC = () => {
         transition={{ transition: "smooth", duration: 3 }}
         className={classes.buttonContaienr}
       >
-        <ReusableButton path={"integers"} name={"Integers"} />
+        <ReusableButton path={"integers"} name={"NumericGenerator"} />
         <ReusableButton path={"acyclic"} name={"Directed acyclic graph"} />
         <ReusableButton path={"binary"} name={"Binary tree"} />
         <ReusableButton path={"sequences"} name={"Sequences"} />

@@ -9,7 +9,6 @@
 select {
   width: 250px;
   height: 25px;
-  margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
   border: 1px solid white;
@@ -22,7 +21,7 @@ select {
   border: 2px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  margin-bottom: 10px; /* Add margin bottom for spacing */
+  margin-bottom: 10px;
 }
 
 .error {

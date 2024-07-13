@@ -1,0 +1,16 @@
+.aboutUs {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 50px;
+}
+.personContainer {
+  width: auto;
+  height: auto;
+  border: 2px solid white;
+  padding-bottom: 25px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+}

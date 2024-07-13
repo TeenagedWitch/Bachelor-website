@@ -13,8 +13,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%s;
-  padding-left: 35px;
+  padding-left: 25px;
 }
 .buttons {
   display: flex;
@@ -48,5 +47,11 @@
   .dag {
     padding-left: 0px;
     align-items: center;
+  }
+  .dagInputs {
+    padding-left: 45px;
+  }
+  .buttons {
+    padding-left: 0px;
   }
 }

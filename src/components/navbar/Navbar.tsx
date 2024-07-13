@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion"; // Import motion from framer-motion
+import { motion } from "framer-motion";
 import classes from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className={classes.navbar}>
       <h1>
-        <Link to="/">Generate</Link>
+        <Link to="/">NDBS Gen</Link>
       </h1>
       <motion.div
         className={`${classes.navList} ${showMenu ? classes.show : ""}`}
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
           </li>
           <li>
             <Link to="" onClick={toggleMenu}>
-              Test
+              Suggestions
             </Link>
           </li>
         </ul>
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
             <Link to="/about">About us</Link>
           </li>
           <li>
-            <Link to="">Test</Link>
+            <Link to="/suggest">Suggestions</Link>
           </li>
         </ul>
       </div>

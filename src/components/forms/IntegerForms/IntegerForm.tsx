@@ -8,6 +8,7 @@ interface GeneratorProps {
   elementsAmount: number;
   numberType: string;
   sorting: string;
+  decimalPlaces?: number; // Optional property for decimal places
 }
 
 const generateIntegers = ({
@@ -16,6 +17,7 @@ const generateIntegers = ({
   elementsAmount,
   numberType,
   sorting,
+  decimalPlaces = 2, // Default to 2 decimal places if not provided
 }: GeneratorProps): number[] => {
   const numbersArray: number[] = [];
   const range = endNum - startNum + 1;
@@ -26,7 +28,7 @@ const generateIntegers = ({
       randomNumber = Math.floor(Math.random() * range) + startNum;
     } else {
       const randomDecimal = Math.random() * range + startNum;
-      randomNumber = parseFloat(randomDecimal.toFixed(2));
+      randomNumber = parseFloat(randomDecimal.toFixed(decimalPlaces));
     }
     numbersArray.push(randomNumber);
   }
@@ -46,6 +48,7 @@ const IntegerForm: React.FC = () => {
   const elementsNumberRef = useRef<HTMLInputElement>(null);
   const numberTypeRef = useRef<HTMLSelectElement>(null);
   const sortRef = useRef<HTMLSelectElement>(null);
+  const decimalPlacesRef = useRef<HTMLInputElement>(null); // Reference for decimal places input
   const [error, setError] = useState<string>("");
 
   const integerSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
@@ -56,6 +59,7 @@ const IntegerForm: React.FC = () => {
     const elementsAmount = Number(elementsNumberRef.current?.value);
     const numberType = numberTypeRef.current?.value || "integer";
     const sorting = sortRef.current?.value || "random";
+    const decimalPlaces = Number(decimalPlacesRef.current?.value) || 2; // Default to 2 decimal places
 
     if (!startNum || !endNum || !elementsAmount) {
       setError("Please fill in all fields.");
@@ -68,6 +72,7 @@ const IntegerForm: React.FC = () => {
       elementsAmount,
       numberType,
       sorting,
+      decimalPlaces,
     });
 
     const resultString = result.join("\n");
@@ -135,6 +140,17 @@ const IntegerForm: React.FC = () => {
           <option value="ascending">Ascending</option>
           <option value="descending">Descending</option>
         </select>
+        <br />
+        <label htmlFor="decimalPlaces">Decimal Places</label>
+        <br />
+        <input
+          type="number"
+          id="decimalPlaces"
+          ref={decimalPlacesRef}
+          className={`${classes.inputField} ${
+            error && !decimalPlacesRef.current?.value && classes.inputError
+          }`}
+        />
         <br />
         {error && <p className={classes.error}>{error}</p>}
         <button type="submit">Generate</button>
