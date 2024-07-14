@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import App from "./App.tsx";
 import "./index.module.css";
 import ErrorScreen from "./screens/ErrorScreen.tsx";
@@ -14,7 +14,7 @@ import AboutUs from "./screens/AboutUs.tsx";
 const root = document.getElementById("root")!;
 const anyReactDOM: any = ReactDOM;
 anyReactDOM.createRoot(root).render(
-  <BrowserRouter>
+  <HashRouter>
     <Layout>
       <Routes>
         <Route path="/" element={<App />} />
@@ -27,5 +27,5 @@ anyReactDOM.createRoot(root).render(
         <Route path="*" element={<ErrorScreen />} />
       </Routes>
     </Layout>
-  </BrowserRouter>
+  </HashRouter>
 );
