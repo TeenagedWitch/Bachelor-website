@@ -3,25 +3,42 @@ import classes from "./Dag.module.css";
 import { Link } from "react-router-dom";
 
 const DAGGenerator: React.FC = () => {
-  const [spikes, setSpikes] = useState<number>(0);
-  const [chestnuts, setChestnuts] = useState<number>(0);
+  const [vertices, setVertices] = useState<number>(0);
+  const [edges, setEdges] = useState<number>(0);
   const [error, setError] = useState<string>("");
 
   const generateDAG = (): string => {
     const nodes: { id: string; label: string; dependencies: string[] }[] = [];
+    const edgesSet = new Set<string>();
 
-    for (let i = 1; i <= spikes; i++) {
-      nodes.push({ id: `Spike_${i}`, label: `Spike ${i}`, dependencies: [] });
+    for (let i = 1; i <= vertices; i++) {
+      nodes.push({ id: `Node_${i}`, label: `Node ${i}`, dependencies: [] });
     }
 
-    for (let i = 1; i <= chestnuts; i++) {
-      const chestnutId = `Chestnut_${i}`;
-      const dependency = `Spike_${Math.floor(Math.random() * spikes) + 1}`;
-      nodes.push({
-        id: chestnutId,
-        label: `Chestnut ${i}`,
-        dependencies: [dependency],
-      });
+    let edgeCount = 0;
+    for (let i = 2; i <= vertices && edgeCount < edges; i++) {
+      const possibleDependencies = Array.from(
+        { length: i - 1 },
+        (_, k) => k + 1
+      );
+      const numberOfDependencies = Math.min(
+        possibleDependencies.length,
+        edges - edgeCount
+      );
+
+      for (let j = 0; j < numberOfDependencies; j++) {
+        const from =
+          possibleDependencies[
+            Math.floor(Math.random() * possibleDependencies.length)
+          ];
+        const edge = `Node_${from}->Node_${i}`;
+        if (!edgesSet.has(edge)) {
+          nodes[i - 1].dependencies.push(`Node_${from}`);
+          edgesSet.add(edge);
+          edgeCount++;
+          if (edgeCount >= edges) break;
+        }
+      }
     }
 
     const dagData = {
@@ -32,7 +49,7 @@ const DAGGenerator: React.FC = () => {
   };
 
   const handleSubmit = (): void => {
-    if (spikes <= 0 || chestnuts <= 0) {
+    if (vertices <= 0 || edges <= 0) {
       setError("Please fill in all fields.");
       return;
     }
@@ -54,10 +71,10 @@ const DAGGenerator: React.FC = () => {
           <br />
           <input
             type="number"
-            value={spikes}
-            onChange={(e) => setSpikes(parseInt(e.target.value))}
+            value={vertices}
+            onChange={(e) => setVertices(parseInt(e.target.value))}
             className={`${classes.inputField} ${
-              error && spikes <= 0 && classes.inputError
+              error && vertices <= 0 && classes.inputError
             }`}
           />
         </label>
@@ -66,10 +83,10 @@ const DAGGenerator: React.FC = () => {
           <br />
           <input
             type="number"
-            value={chestnuts}
-            onChange={(e) => setChestnuts(parseInt(e.target.value))}
+            value={edges}
+            onChange={(e) => setEdges(parseInt(e.target.value))}
             className={`${classes.inputField} ${
-              error && chestnuts <= 0 && classes.inputError
+              error && edges <= 0 && classes.inputError
             }`}
           />
         </label>
