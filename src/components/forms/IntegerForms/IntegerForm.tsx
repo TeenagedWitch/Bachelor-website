@@ -48,7 +48,7 @@ const IntegerForm: React.FC = () => {
   const elementsNumberRef = useRef<HTMLInputElement>(null);
   const numberTypeRef = useRef<HTMLSelectElement>(null);
   const sortRef = useRef<HTMLSelectElement>(null);
-  const decimalPlacesRef = useRef<HTMLInputElement>(null); // Reference for decimal places input
+  const decimalPlacesRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string>("");
 
   const integerSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
@@ -59,7 +59,7 @@ const IntegerForm: React.FC = () => {
     const elementsAmount = Number(elementsNumberRef.current?.value);
     const numberType = numberTypeRef.current?.value || "integer";
     const sorting = sortRef.current?.value || "random";
-    const decimalPlaces = Number(decimalPlacesRef.current?.value) || 2; // Default to 2 decimal places
+    const decimalPlaces = Number(decimalPlacesRef.current?.value) || 2;
 
     if (!startNum || !endNum || !elementsAmount) {
       setError("Please fill in all fields.");
@@ -75,9 +75,11 @@ const IntegerForm: React.FC = () => {
       decimalPlaces,
     });
 
-    const resultString = result.join("\n");
+    const formattedNumbers = result
+      .map((num) => num.toFixed(decimalPlaces))
+      .join("\n");
 
-    const blob = new Blob([resultString], { type: "text/plain" });
+    const blob = new Blob([formattedNumbers], { type: "text/plain" });
 
     const url = URL.createObjectURL(blob);
 
