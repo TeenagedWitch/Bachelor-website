@@ -10,6 +10,7 @@ import BinaryTree from "./screens/Binary.tsx";
 import Layout from "./assets/layout/Layout.tsx";
 import ContactUs from "./screens/ContactUs.tsx";
 import AboutUs from "./screens/AboutUs.tsx";
+import Suggest from "./screens/Suggest.tsx";
 
 const root = document.getElementById("root")!;
 const anyReactDOM: any = ReactDOM;
@@ -24,6 +25,7 @@ anyReactDOM.createRoot(root).render(
         <Route path="/sequences" element={<Sequence />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/suggest" element={<Suggest />} />
         <Route path="*" element={<ErrorScreen />} />
       </Routes>
     </Layout>

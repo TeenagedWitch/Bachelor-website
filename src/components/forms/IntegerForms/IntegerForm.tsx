@@ -75,17 +75,21 @@ const IntegerForm: React.FC = () => {
       decimalPlaces,
     });
 
-    const formattedNumbers = result
-      .map((num) => num.toFixed(decimalPlaces))
-      .join("\n");
+    // Format numbers for display purposes (not needed for JSON output)
+    const formattedNumbers = result.map((num) =>
+      parseFloat(num.toFixed(decimalPlaces))
+    );
 
-    const blob = new Blob([formattedNumbers], { type: "text/plain" });
+    // Convert to JSON format
+    const jsonArray = JSON.stringify(formattedNumbers, null, 2);
+
+    const blob = new Blob([jsonArray], { type: "application/json" });
 
     const url = URL.createObjectURL(blob);
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = "random_numbers.txt";
+    link.download = "random_numbers.json";
     link.click();
 
     URL.revokeObjectURL(url);
